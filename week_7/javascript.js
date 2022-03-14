@@ -23,6 +23,43 @@ const animal = [new Cat(), new Pug(), new Turtle()];
 
 const names = ['Zac', 'Lisa', 'Will', 'Jess', 'Gabby', 'Sally', 'Tony'];
 
-function getRandomIndex(maxIndex){
-    Math.floor(Math.random() * maxIndex)
+function generateRandomIndex(maxIndex){
+    let x = Math.floor(Math.random() * maxIndex);
+    return x;
+}
+
+function generateRandomName(){
+    let randomIndex = generateRandomIndex(names.length);
+    return names[randomIndex];
+}
+
+function generateRandomAge(){
+    let age = generateRandomIndex(15);
+    return age;
+}
+
+function generateRandomAnimal(){
+    let animalIndex = generateRandomIndex(3);
+    randomAnimal = animal[animalIndex];
+
+    if (randomAnimal instanceof Cat) {
+        return new Cat(generateRandomName(), generateRandomAge());
+    } 
+    else if (randomAnimal instanceof Pug) {
+        return new Pug(generateRandomName(), generateRandomAge());
+    } 
+    else if (randomAnimal instanceof Turtle) {
+        return new Turtle(generateRandomName(), generateRandomAge());
+    }
+}
+
+function onLoad() {
+    let animal = generateRandomAnimal();
+    console.log(animal)
+    // update the page based on the animal properties
+    document.getElementById("animal-properties").textContent = animal.name + "  " + animal.age + "years old";
+    let imageTag = document.getElementById("animal-img");
+    imageTag.setAttribute("src", animal.image);
+    imageTag.setAttribute("alt", animal.image_alt);
+  
 }
